@@ -2,7 +2,7 @@
 
 ## 🛠️ Getting Started
 
-### 1. Clone the Repository
+### Clone the Repository
 
 `git clone https://github.com/Arunmadhavan28/sms_UI.git`
 `cd sms_UI`
