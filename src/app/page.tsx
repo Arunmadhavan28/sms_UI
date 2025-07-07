@@ -3,25 +3,25 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 export default function HomePage() {
- const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
+  const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
+  const [openMenu, setOpenMenu] = useState(false);
 
-const pricingData: Record<"monthly" | "annual", { name: string; price: string; features: string[] }[]> = {
-  monthly: [
-    { name: "Starter", price: "$29", features: ["1,000 SMS credits/month", "Basic analytics", "Email support"] },
-    { name: "Pro", price: "$99", features: ["5,000 SMS credits/month", "Advanced analytics", "API access"] },
-    { name: "Enterprise", price: "$299", features: ["25,000 SMS credits/month", "Custom integrations", "24/7 support"] }
-  ],
-  annual: [
-    { name: "Starter", price: "$278", features: ["12,000 SMS credits/year", "Basic analytics", "Email support"] },
-    { name: "Pro", price: "$950", features: ["60,000 SMS credits/year", "Advanced analytics", "API access"] },
-    { name: "Enterprise", price: "$2860", features: ["300,000 SMS credits/year", "Custom integrations", "24/7 support"] }
-  ]
-};
-
+  const pricingData: Record<"monthly" | "annual", { name: string; price: string; features: string[] }[]> = {
+    monthly: [
+      { name: "Starter", price: "$29", features: ["1,000 SMS credits/month", "Basic analytics", "Email support"] },
+      { name: "Pro", price: "$99", features: ["5,000 SMS credits/month", "Advanced analytics", "API access"] },
+      { name: "Enterprise", price: "$299", features: ["25,000 SMS credits/month", "Custom integrations", "24/7 support"] }
+    ],
+    annual: [
+      { name: "Starter", price: "$278", features: ["12,000 SMS credits/year", "Basic analytics", "Email support"] },
+      { name: "Pro", price: "$950", features: ["60,000 SMS credits/year", "Advanced analytics", "API access"] },
+      { name: "Enterprise", price: "$2860", features: ["300,000 SMS credits/year", "Custom integrations", "24/7 support"] }
+    ]
+  };
 
   const testimonials = [
     { name: "Amit Patel", quote: "Reliable and fast SMS delivery!", rating: 5 },
@@ -40,23 +40,45 @@ const pricingData: Record<"monthly" | "annual", { name: string; price: string; f
     "/2factor.png", "/exotel.png", "/smscountry.png", "/twilio.png"
   ];
 
-
   return (
-    <main className="bg-[#0F0F1B] text-white scroll-smooth">
-      {/* Navbar */}
-      <nav className="flex justify-between items-center px-6 py-4 border-b border-gray-800 backdrop-blur-md sticky top-0 z-50">
-        <Image src="/logo.png" alt="Logo" width={120} height={50} />
-        <ul className="flex space-x-6 text-sm">
-          <li><a href="#features" className="hover:text-green-400 transition">Features</a></li>
-          <li><a href="#usecases" className="hover:text-green-400 transition">Use Cases</a></li>
-          <li><a href="#setup" className="hover:text-green-400 transition">Setup</a></li>
-          <li><a href="#pricing" className="hover:text-green-400 transition">Pricing</a></li>
-        </ul>
-        <div className="flex space-x-3">
-          <a href="#contact"><Button variant="outline">Contact</Button></a>
-          <Button>Start now</Button>
-        </div>
-      </nav>
+    <div className="overflow-x-hidden w-full scroll-smooth">
+      <main className="bg-[#0F0F1B] text-white">
+        {/* Navbar */}
+        <nav className="flex justify-between items-center px-6 py-4 border-b border-gray-800 sticky top-0 z-50 bg-[#0F0F1B] backdrop-blur-md">
+          <Image src="/logo.png" alt="Logo" width={120} height={50} />
+          <ul className="hidden md:flex space-x-6 text-sm">
+            <li><a href="#features" className="hover:text-green-400 transition">Features</a></li>
+            <li><a href="#usecases" className="hover:text-green-400 transition">Use Cases</a></li>
+            <li><a href="#setup" className="hover:text-green-400 transition">Setup</a></li>
+            <li><a href="#pricing" className="hover:text-green-400 transition">Pricing</a></li>
+          </ul>
+          <div className="hidden md:flex space-x-3">
+            <a href="#contact"><Button variant="outline">Contact</Button></a>
+            <Button>Start now</Button>
+          </div>
+          <div className="md:hidden">
+            <button onClick={() => setOpenMenu(!openMenu)}>
+              {openMenu ? <X className="text-white" /> : <Menu className="text-white" />}
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile Menu */}
+        {openMenu && (
+          <div className="md:hidden bg-[#0F0F1B] border-t border-gray-800 px-6 pb-4 space-y-3">
+            <ul className="space-y-2 text-sm">
+              <li><a href="#features" onClick={() => setOpenMenu(false)}>Features</a></li>
+              <li><a href="#usecases" onClick={() => setOpenMenu(false)}>Use Cases</a></li>
+              <li><a href="#setup" onClick={() => setOpenMenu(false)}>Setup</a></li>
+              <li><a href="#pricing" onClick={() => setOpenMenu(false)}>Pricing</a></li>
+            </ul>
+            <div className="pt-4 flex flex-col space-y-2">
+              <a href="#contact"><Button variant="outline" className="w-full">Contact</Button></a>
+              <Button className="w-full">Start now</Button>
+            </div>
+          </div>
+        )}
+
 
       {/* Hero Section */}
     <section className="flex flex-col-reverse md:flex-row items-center justify-between px-4 sm:px-6 py-12 sm:py-16 gap-8 sm:gap-10">
@@ -89,26 +111,32 @@ const pricingData: Record<"monthly" | "annual", { name: string; price: string; f
       <div className="h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent mb-12"></div>
 
            {/* Scrolling Partners Section */}
-      <section className="py-10 px-6 bg-[#11111C] text-center">
-        <h2 className="text-2xl font-bold mb-6">Trusted by Industry Leaders</h2>
-        <div className="overflow-hidden">
-          <motion.div
-            className="flex w-max space-x-12 animate-scroll-x"
-            style={{ animation: "scroll-x 40s linear infinite" }}
-          >
-            {partners.concat(partners).map((src, idx) => (
-              <Image
-                key={idx}
-                src={src}
-                alt={`Partner ${idx}`}
-                width={120}
-                height={60}
-                className="object-contain grayscale hover:grayscale-0 transition duration-300"
-              />
-            ))}
-          </motion.div>
-        </div>
-      </section>
+
+        <section className="py-10 px-6 bg-[#11111C] text-center">
+          <h2 className="text-2xl font-bold mb-6">Trusted by Industry Leaders</h2>
+          <div className="overflow-hidden relative w-full">
+            <div className="absolute top-0 left-0 h-full w-full z-10 bg-gradient-to-r from-[#11111C] via-transparent to-[#11111C] pointer-events-none" />
+            <motion.div
+              initial={{ x: 0 }}
+              animate={{ x: "-50%" }}
+              transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+              className="flex w-max space-x-12"
+            >
+              {[...partners, ...partners].map((src, idx) => (
+                <Image
+                  key={idx}
+                  src={src}
+                  alt={`Partner ${idx}`}
+                  width={120}
+                  height={60}
+                  className="object-contain grayscale hover:grayscale-0 transition duration-300"
+                />
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+<div className="h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent mb-12"></div>
 
       {/* Setup Section */}
       <section id="setup" className="text-center py-20">
@@ -157,6 +185,32 @@ const pricingData: Record<"monthly" | "annual", { name: string; price: string; f
         </div>
       </section>
 
+     <div className="h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent my-16"></div>
+
+        {/* === NEW SECTION: USE CASES === */}
+        <section id="usecases" className="px-6 py-20 text-center bg-[#11111C]">
+          <h2 className="text-4xl font-bold mb-4">Popular Use Cases</h2>
+          <p className="text-gray-400 mb-10 max-w-xl mx-auto">Our SMS platform is built to support various industries and communication goals.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div whileHover={{ scale: 1.05 }} className="bg-[#181826] rounded-xl p-6">🛒 Ecommerce Notifications</motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} className="bg-[#181826] rounded-xl p-6">📅 Appointment Reminders</motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} className="bg-[#181826] rounded-xl p-6">🎟 Event Promotions</motion.div>
+          </div>
+        </section>
+
+             <div className="h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent my-16"></div>
+
+                      {/* === NEW SECTION: FEATURES  === */}
+        <section id="features" className="px-6 py-20 text-center bg-[#0F0F1B]">
+          <h2 className="text-4xl font-bold mb-4">Powerful Features</h2>
+          <p className="text-gray-400 mb-10 max-w-xl mx-auto">Everything you need to deliver high-converting and high-volume SMS campaigns.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div whileHover={{ scale: 1.05 }} className="bg-[#181826] rounded-xl p-6">📈 Real-Time Delivery Reports</motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} className="bg-[#181826] rounded-xl p-6">📦 Bulk SMS Scheduling</motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} className="bg-[#181826] rounded-xl p-6">🔐 Enterprise-Grade Security</motion.div>
+          </div>
+        </section>
+
       {/* Pricing Section */}
       <section id="pricing" className="py-20 px-6 text-center">
         <h2 className="text-4xl font-bold mb-4">Transparent Pricing</h2>
@@ -196,6 +250,8 @@ const pricingData: Record<"monthly" | "annual", { name: string; price: string; f
           ))}
         </div>
       </section>
+
+      
 
       {/* Custom Solution */}
       <section id="contact" className="py-20 px-6 bg-gradient-to-r from-[#0F0F1B] to-[#0F1F2B] text-center">
@@ -255,5 +311,6 @@ const pricingData: Record<"monthly" | "annual", { name: string; price: string; f
         </div>
       </footer>
     </main>
+     </div>
   );
 }
