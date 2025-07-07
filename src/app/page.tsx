@@ -7,20 +7,21 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
 export default function HomePage() {
-  const [billing, setBilling] = useState("monthly");
+ const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
 
-  const pricingData = {
-    monthly: [
-      { name: "Starter", price: "$29", features: ["1,000 SMS credits/month", "Basic analytics", "Email support"] },
-      { name: "Pro", price: "$99", features: ["5,000 SMS credits/month", "Advanced analytics", "API access"] },
-      { name: "Enterprise", price: "$299", features: ["25,000 SMS credits/month", "Custom integrations", "24/7 support"] }
-    ],
-    annual: [
-      { name: "Starter", price: "$278", features: ["12,000 SMS credits/year", "Basic analytics", "Email support"] },
-      { name: "Pro", price: "$950", features: ["60,000 SMS credits/year", "Advanced analytics", "API access"] },
-      { name: "Enterprise", price: "$2860", features: ["300,000 SMS credits/year", "Custom integrations", "24/7 support"] }
-    ]
-  };
+const pricingData: Record<"monthly" | "annual", { name: string; price: string; features: string[] }[]> = {
+  monthly: [
+    { name: "Starter", price: "$29", features: ["1,000 SMS credits/month", "Basic analytics", "Email support"] },
+    { name: "Pro", price: "$99", features: ["5,000 SMS credits/month", "Advanced analytics", "API access"] },
+    { name: "Enterprise", price: "$299", features: ["25,000 SMS credits/month", "Custom integrations", "24/7 support"] }
+  ],
+  annual: [
+    { name: "Starter", price: "$278", features: ["12,000 SMS credits/year", "Basic analytics", "Email support"] },
+    { name: "Pro", price: "$950", features: ["60,000 SMS credits/year", "Advanced analytics", "API access"] },
+    { name: "Enterprise", price: "$2860", features: ["300,000 SMS credits/year", "Custom integrations", "24/7 support"] }
+  ]
+};
+
 
   const testimonials = [
     { name: "Amit Patel", quote: "Reliable and fast SMS delivery!", rating: 5 },
