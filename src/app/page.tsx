@@ -59,32 +59,32 @@ const pricingData: Record<"monthly" | "annual", { name: string; price: string; f
       </nav>
 
       {/* Hero Section */}
-      <section className="flex flex-col-reverse md:flex-row items-center justify-between px-6 py-16 gap-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="max-w-xl text-center md:text-left"
-        >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
-            Built to Help You <br /> Reach More, <br /> Stress Less!
-          </h1>
-          <p className="text-gray-400 mb-6">
-            Send thousands of personalized SMS messages in seconds. Our platform delivers high-volume, reliable messaging with industry-leading deliverability rates.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
-            <a href="#contact"><Button>Start Messaging</Button></a>
-            <a href="#pricing"><Button variant="outline">View Pricing</Button></a>
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          <Image src="/talk.png" alt="Hero" width={500} height={400} />
-        </motion.div>
-      </section>
+    <section className="flex flex-col-reverse md:flex-row items-center justify-between px-4 sm:px-6 py-12 sm:py-16 gap-8 sm:gap-10">
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    className="max-w-xl text-center md:text-left"
+  >
+    <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">
+      Built to Help You <br /> Reach More, <br /> Stress Less!
+    </h1>
+    <p className="text-gray-400 mb-6 text-sm sm:text-base">
+      Send thousands of personalized SMS messages in seconds. Our platform delivers high-volume, reliable messaging with industry-leading deliverability rates.
+    </p>
+    <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4">
+      <a href="#contact" className="w-full sm:w-auto"><Button className="w-full sm:w-auto">Start Messaging</Button></a>
+      <a href="#pricing" className="w-full sm:w-auto"><Button variant="outline" className="w-full sm:w-auto">View Pricing</Button></a>
+    </div>
+  </motion.div>
+  <motion.div
+    initial={{ scale: 0.8, opacity: 0 }}
+    animate={{ scale: 1, opacity: 1 }}
+    transition={{ delay: 0.2, duration: 0.6 }}
+  >
+    <Image src="/talk.png" alt="Hero" width={400} height={300} className="mx-auto max-w-[90vw] h-auto" />
+  </motion.div>
+</section>
 
       <div className="h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent mb-12"></div>
 
