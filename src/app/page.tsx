@@ -211,6 +211,8 @@ export default function HomePage() {
           </div>
         </section>
 
+         <div className="h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent my-16"></div>
+
       {/* Pricing Section */}
       <section id="pricing" className="py-20 px-6 text-center">
         <h2 className="text-4xl font-bold mb-4">Transparent Pricing</h2>
